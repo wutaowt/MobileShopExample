@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.huatec.edu.mobileshop.dao.MemberDao">
+	<!-- useGeneratedKeys="true" keyProperty="member_id" -->
+	<insert id="save" parameterType="com.huatec.edu.mobileshop.entity.Member"
+		useGeneratedKeys="true" keyProperty="member_id">
+		insert into
+		ms_member(member_id,uname,password,email,sex,mobile,
+		lastlogin,image)
+		values(#{member_id},#{uname},#{password},#{email},#{sex},#{mobile},
+		#{lastlogin},#{image})
+	</insert>
+
+	<select id="findAll" resultType="com.huatec.edu.mobileshop.entity.Member">
+		select * from ms_member
+	</select>
+
+	<update id="updatePwdById" parameterType="map">
+		update ms_member
+		set
+		password =#{password}
+		where member_id =#{member_id}
+	</update>
+
+
+	<delete id="deleteById">
+		delete from ms_member
+		where member_id =#{member_id}
+	</delete>
+	<select id="findUnion" parameterType="int" resultMap="memberMap">
+		select * from
+		ms_member mm join ms_member_address mma
+		on mm.member_id=mma.member_id
+		where mm.member_id=#{member_id}
+	</select>
+
+	<resultMap type="com.huatec.edu.mobileshop.entity.Member" id="memberMap">
+	
+	
+		<id   property="member_id" column="member_id" />
+		<result property="uname" column="uname" />
+		<result property="password" column="password" />
+		<result property="email" column="email" />
+		<result property="sex" column="sex" />
+		<result property="mobile" column="mobile" />
+		<result property="regtime" column="regtime" />
+		<result property="lastlogin" column="lastlogin" />
+		<result property="image" column="image" />
+
+
+		<collection property="memberAddress" javaType="java.util.List"
+			ofType="com.huatec.edu.mobileshop.entity.MemberAddress">
+
+			<id property="address_id" column="address_id" />
+			<result property="member_id" column="member_id" />
+			<result property="province" column="province" />
+			<result property="city" column="city" />
+			<result property="region" column="region" />
+			<result property="addr" column="addr" />
+			<result property="mobile" column="mobile" />
+			<result property="receiver" column="receiver" />
+			<result property="creatime" column="creatime" />
+			<result property="modifytime" column="modifytime" />
+
+		</collection>
+
+	</resultMap>
+
+
+
+
+
+
+
+
+</mapper>
