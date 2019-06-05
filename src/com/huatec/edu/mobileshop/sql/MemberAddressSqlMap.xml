@@ -11,7 +11,7 @@
 		useGeneratedKeys="true" keyProperty="address_id">
 
 		insert into ms_member_address
-		(address_id,member_id,province,city,region,
+		(address_id,name,province,city,region,
 		addr,mobile,receiver,createtime,modifytime)
 
 		values(#{address_id},#{member_id},#{province},#{city},#{region},

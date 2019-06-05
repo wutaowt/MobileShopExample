@@ -21,5 +21,5 @@ public interface MemberAddressDao {
 		public List<MemberAddress> dynamicForeachTest(MemberAddress ma);
 		
 		public List<MemberAddress> findUnion(int member_id);
-	
+		
 }
